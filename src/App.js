@@ -14,6 +14,7 @@ const chartDataSelector = (state) => {
   };
 };
 
+// Not too convinced about it
 const formatPoints = (names, points) => {
   let result = [];
   for (let i = 0; i < 10; i++) {

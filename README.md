@@ -1,68 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dynamic charts
 
-## Available Scripts
+## How to run
 
-In the project directory, you can run:
+1. Run `npm install` to install dependencies
+2. Run `npm start` to launch the app in development mode
+3. ??????
+4. PROFIT
 
-### `npm start`
+## Changelog
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+_(since the initial demonstration, that is)_
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Changed the structure of the store (now everything depends on indices instead
+  of having to run `Object.keys()` every single time)
+- Changed the API call. Now we handle network errors right there. See
+  `src/api/index.js` for commentaries
+- Updated and simplified the scheduler logic. See `src/scheduler.js`
+- The chart renderer actually works now!
 
-### `npm test`
+## Developer's notes
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The first thing I did after the discussion was changing the structure of the
+store. I liked the idea of removing `Object.keys()` and instead have everything
+depend on indices. This led to recurring calculation of indices in action
+creators. While changing the scheduler to work with the new store structure, I
+realised that we already have the required indices right there, so it allowed me
+to get rid of unneeded extra calculations
 
-### `npm run build`
+Turns out, `Recharts` doesn't really allow for a different data structure, so I
+had to add an additional step to format the data into the shape that recharts
+could swallow. See `src/App.js:18`.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**What could be improved:**
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- The code structure is suitable for a small project, but on a real large-scale
+  project this structure wouldn't have been used as it's hard to extend.
+- The extra step to format the data into a recharts-friendly shape - I'm not
+  happy about it. I believe it could be improved, but I'm too tired to be
+  bothered right now
+- Error handling for both API calls and store. We've discussed several ideas,
+  what I have right now is extremely basic (but it works)
+- There's a significant amount of logic that should be covered with tests
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Just for laughs**
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+In `src/App.js:57`, change the `isAnimationActive` prop to `true` and reload the
+app. Enjoy the snake race :D
