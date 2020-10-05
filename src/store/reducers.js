@@ -49,7 +49,7 @@ export const activeStatusReducer = (state = [], action) => {
       return state.map((enabled, index) =>
         // When we hit the index we want, return the value from the action
         // Otherwise, return the old value
-        index === action.id ? action.enabled : enabled
+        index === action.idx ? action.enabled : enabled
       );
     default:
       return state;

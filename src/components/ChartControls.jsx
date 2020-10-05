@@ -2,21 +2,22 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleChart } from '../store/actions';
 
-const ChartControls = ({ activeCharts }) => {
+const ChartControls = ({ names, activeStatus }) => {
   const dispatch = useDispatch();
+
   return (
     <div className="chart-controls">
-      {Object.keys(activeCharts).map((chartName) => (
-        <label>
+      {names.map((name, idx) => (
+        <label key={`label_${name}`}>
           <input
             type="checkbox"
-            value={activeCharts[chartName]}
+            checked={activeStatus[idx]}
             onChange={(e) => {
               e.stopPropagation();
-              dispatch(toggleChart(chartName, e.target.value));
+              dispatch(toggleChart(idx, e.target.checked));
             }}
           />
-          {chartName}
+          {name}
         </label>
       ))}
     </div>
