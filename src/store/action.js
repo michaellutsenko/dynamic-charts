@@ -4,13 +4,12 @@ import moment from 'moment';
 export const initialiseChart = (name, colour) => async (dispatch) => {
   try {
     const response = await fetchPoints();
-    const points = response.data.map((value) => ({ value }));
     dispatch({
       type: 'initialiseChart',
       payload: {
         name,
         colour,
-        points,
+        points: response.data,
       },
     });
   } catch (err) {
@@ -21,15 +20,11 @@ export const initialiseChart = (name, colour) => async (dispatch) => {
 export const getPoint = (name) => async (dispatch) => {
   try {
     const response = await fetchPoints();
-    const point = {
-      value: response.data[0],
-      timestamp: moment().format('H:mm:ss'),
-    };
     dispatch({
       type: 'initialiseChart',
       payload: {
         name,
-        point,
+        point: response.data[0],
       },
     });
   } catch (err) {
