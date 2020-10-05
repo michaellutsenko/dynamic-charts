@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { initialiseChart } from '../store/action';
+import { initialiseChart } from '../store/actions';
 
 const AddChart = () => {
   const dispatch = useDispatch();

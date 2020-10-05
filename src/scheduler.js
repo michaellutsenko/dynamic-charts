@@ -1,4 +1,4 @@
-import { addEmptyPoint, getPoint } from './store/action';
+import { addEmptyPoint, getPoint } from './store/actions';
 
 const scheduleRequest = (store) => () => {
   const activeCharts = store.getState().activeCharts;

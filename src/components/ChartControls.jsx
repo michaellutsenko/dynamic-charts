@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleChart } from '../store/action';
+import { toggleChart } from '../store/actions';
 
 const ChartControls = ({ activeCharts }) => {
   const dispatch = useDispatch();
