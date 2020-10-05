@@ -26,7 +26,13 @@ const AddChart = () => {
         value="Add chart"
         onClick={(e) => {
           e.stopPropagation();
+          if (!name) {
+            alert('Chart must have a name');
+          }
           dispatch(initialiseChart(name, colour));
+          // Reset the fields to default
+          setName('');
+          setColour('#000000');
         }}
       />
     </div>

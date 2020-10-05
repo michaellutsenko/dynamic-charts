@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import './App.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import AddChart from './components/AddChart';
-// import ChartControls from './components/ChartControls';
+import ChartControls from './components/ChartControls';
 
 const chartDataSelector = (state) => {
   return {
@@ -14,9 +14,17 @@ const chartDataSelector = (state) => {
   };
 };
 
-// const getChartPoints = (name) => (data) => {
-//   return data[0][name];
-// };
+const formatPoints = (names, points) => {
+  let result = [];
+  for (let i = 0; i < 10; i++) {
+    let point = { index: i };
+    names.forEach((name, idx) => {
+      point[name] = points[idx][i];
+    });
+    result.push(point);
+  }
+  return result;
+};
 
 const App = () => {
   const { names, points, activeStatus, colours } = useSelector(
@@ -29,31 +37,32 @@ const App = () => {
       <div className="app-container">
         <AddChart />
 
-        {names.map((name, idx) => (
-          <div key={`chart_${name}`}>
-            {name}: {activeStatus[idx]}, {colours[idx]}
-            <br />
-            {points[idx].join(', ')}
-          </div>
-        ))}
-        {/* <div>
-          <ChartControls activeCharts={activeCharts} />
-          <LineChart width={500} height={300} data={[chartPoints]}>
+        <div>
+          <ChartControls names={names} activeStatus={activeStatus} />
+          <LineChart
+            width={500}
+            height={300}
+            data={formatPoints(names, points)}
+          >
             <CartesianGrid />
-            <XAxis />
+            <XAxis dataKey="index" />
             <YAxis />
 
-            {Object.keys(chartPoints).map((chartName) => {
+            {names.map((name, idx) => {
               return (
                 <Line
-                  dataKey={getChartPoints(chartName)}
-                  stroke={chartColours[chartName]}
-                  fill={chartColours[chartName]}
+                  key={`chart_${name}`}
+                  type="monotone"
+                  // Switch isAnimationActive to true and observe the snake race
+                  isAnimationActive={false}
+                  dataKey={name}
+                  stroke={colours[idx]}
+                  fill={colours[idx]}
                 />
               );
             })}
           </LineChart>
-        </div> */}
+        </div>
       </div>
     </>
   );
