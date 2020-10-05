@@ -1,15 +1,17 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import {
-  activeChartsReducer,
-  chartColoursReducer,
-  chartPointsReducer,
+  namesReducer,
+  activeStatusReducer,
+  coloursReducer,
+  pointsReducer,
 } from './reducers';
 
 const rootReducer = combineReducers({
-  activeCharts: activeChartsReducer,
-  chartColours: chartColoursReducer,
-  chartPoints: chartPointsReducer,
+  names: namesReducer,
+  points: pointsReducer,
+  colours: coloursReducer,
+  activeStatus: activeStatusReducer,
 });
 
 export const configureStore = () => {

@@ -1,46 +1,42 @@
-export const chartPointsReducer = (state = {}, { type, payload }) => {
-  switch (type) {
+export const namesReducer = (state = [], action) => {
+  switch (action.type) {
     case 'initialiseChart':
-      return {
-        ...state,
-        [payload.name]: payload.points,
-      };
+      return [...state, action.name];
+    default:
+      return state;
+  }
+};
+
+export const pointsReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'initialiseChart':
+      return [...state, action.points];
     case 'addChartPoint': {
-      const [first, ...remainder] = state[payload.name];
-      return {
-        ...state,
-        [payload.name]: [...remainder, payload.point],
-      };
+      const [first, ...remainder] = state[action.idx];
+      return [...state, [...remainder, action.point]];
     }
     default:
       return state;
   }
 };
 
-export const chartColoursReducer = (state = {}, { type, payload }) => {
-  switch (type) {
+export const coloursReducer = (state = [], action) => {
+  switch (action.type) {
     case 'initialiseChart':
-      return {
-        ...state,
-        [payload.name]: payload.colour,
-      };
+      return [...state, action.colour];
     default:
       return state;
   }
 };
 
-export const activeChartsReducer = (state = {}, { type, payload }) => {
-  switch (type) {
+export const activeStatusReducer = (state = [], action) => {
+  switch (action.type) {
     case 'initialiseChart':
-      return {
-        ...state,
-        [payload.name]: true,
-      };
+      return [...state, true];
     case 'toggleChart':
-      return {
-        ...state,
-        [payload.name]: payload.enabled,
-      };
+      return state.map((enabled, index) =>
+        index === action.id ? action.enabled : enabled
+      );
     default:
       return state;
   }
