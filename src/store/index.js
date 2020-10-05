@@ -9,7 +9,7 @@ import {
 const rootReducer = combineReducers({
   activeCharts: activeChartsReducer,
   chartColours: chartColoursReducer,
-  chartData: chartPointsReducer,
+  chartPoints: chartPointsReducer,
 });
 
 export const configureStore = () => {

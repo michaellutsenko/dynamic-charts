@@ -1,5 +1,4 @@
 import { fetchPoints } from '../api';
-import moment from 'moment';
 
 export const initialiseChart = (name, colour) => async (dispatch) => {
   try {
@@ -21,7 +20,7 @@ export const getPoint = (name) => async (dispatch) => {
   try {
     const response = await fetchPoints();
     dispatch({
-      type: 'initialiseChart',
+      type: 'addChartPoint',
       payload: {
         name,
         point: response.data[0],
@@ -30,6 +29,16 @@ export const getPoint = (name) => async (dispatch) => {
   } catch (err) {
     console.error(err);
   }
+};
+
+export const addEmptyPoint = (name) => {
+  return {
+    type: 'addChartPoint',
+    payload: {
+      name,
+      point: null,
+    },
+  };
 };
 
 export const toggleChart = (name, enabled) => {

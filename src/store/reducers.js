@@ -1,4 +1,4 @@
-export const chartPoints = (state = {}, { type, payload }) => {
+export const chartPointsReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case 'initialiseChart':
       return {

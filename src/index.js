@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import { configureStore } from './store';
 import { Provider } from 'react-redux';
+import { setScheduler } from './scheduler';
 
 const store = configureStore();
+setScheduler(store);
 
 ReactDOM.render(
   <React.StrictMode>
