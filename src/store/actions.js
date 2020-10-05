@@ -10,28 +10,25 @@ export const initialiseChart = (name, colour) => async (dispatch) => {
   });
 };
 
-export const getPoint = (name) => async (dispatch, getState) => {
-  const response = await fetchPoints(1);
-  const idx = getState().names.findIndex((x) => x === name);
+export const getPoint = (idx) => async (dispatch) => {
+  const points = await fetchPoints(1);
 
   dispatch({
     type: 'addChartPoint',
     idx,
-    point: response.data[0],
+    point: points[0],
   });
 };
 
-export const addEmptyPoint = (name) => (dispatch, getState) => {
-  const idx = getState().names.findIndex((x) => x === name);
-  dispatch({
+export const addEmptyPoint = (idx) => {
+  return {
     type: 'addChartPoint',
     idx,
     point: null,
-  });
+  };
 };
 
-export const toggleChart = (name, enabled) => (dispatch, getState) => {
-  const idx = getState().names.findIndex((x) => x === name);
+export const toggleChart = (idx, enabled) => {
   return {
     type: 'toggleChart',
     idx,

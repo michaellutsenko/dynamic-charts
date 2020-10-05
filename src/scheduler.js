@@ -1,14 +1,14 @@
 import { addEmptyPoint, getPoint } from './store/actions';
 
 const scheduleRequest = (store) => () => {
-  const activeCharts = store.getState().activeCharts;
-  const chartNames = Object.keys(activeCharts);
-  if (!!chartNames) {
-    chartNames.forEach((name) => {
-      if (activeCharts[name]) {
-        store.dispatch(getPoint(name));
+  const { activeStatus } = store.getState();
+
+  if (activeStatus.length) {
+    activeStatus.forEach((status, idx) => {
+      if (status) {
+        store.dispatch(getPoint(idx));
       } else {
-        store.dispatch(addEmptyPoint(name));
+        store.dispatch(addEmptyPoint(idx));
       }
     });
   }

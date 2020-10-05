@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { setScheduler } from './scheduler';
 
 const store = configureStore();
-// setScheduler(store);
+setScheduler(store);
 
 ReactDOM.render(
   <React.StrictMode>
