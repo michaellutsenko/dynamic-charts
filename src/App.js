@@ -3,22 +3,23 @@ import { useSelector } from 'react-redux';
 import './App.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import AddChart from './components/AddChart';
-import ChartControls from './components/ChartControls';
+// import ChartControls from './components/ChartControls';
 
 const chartDataSelector = (state) => {
   return {
-    activeCharts: state.activeCharts,
-    chartColours: state.chartColours,
-    chartPoints: state.chartPoints,
+    names: state.names,
+    points: state.points,
+    activeStatus: state.activeStatus,
+    colours: state.colours,
   };
 };
 
-const getChartPoints = (name) => (data) => {
-  return data[0][name];
-};
+// const getChartPoints = (name) => (data) => {
+//   return data[0][name];
+// };
 
 const App = () => {
-  const { activeCharts, chartColours, chartPoints } = useSelector(
+  const { names, points, activeStatus, colours } = useSelector(
     chartDataSelector
   );
 
@@ -28,7 +29,14 @@ const App = () => {
       <div className="app-container">
         <AddChart />
 
-        <div>
+        {names.map((name, idx) => (
+          <div key={`chart_${name}`}>
+            {name}: {activeStatus[idx]}, {colours[idx]}
+            <br />
+            {points[idx].join(', ')}
+          </div>
+        ))}
+        {/* <div>
           <ChartControls activeCharts={activeCharts} />
           <LineChart width={500} height={300} data={[chartPoints]}>
             <CartesianGrid />
@@ -45,7 +53,7 @@ const App = () => {
               );
             })}
           </LineChart>
-        </div>
+        </div> */}
       </div>
     </>
   );
