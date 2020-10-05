@@ -1,0 +1,26 @@
+.chart-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 15px;
+}
+
+.chart-controls {
+  margin-left: 15px;
+  margin-top: 20px;
+}
+
+.add-chart {
+  margin-left: 65px;
+  margin-bottom: 30px;
+}
+
+.add-chart input[type='color'] {
+  margin-left: 10px;
+}
+
+.add-chart input[type='button'] {
+  display: block;
+  margin-top: 10px;
+}

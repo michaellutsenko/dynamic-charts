@@ -37,8 +37,7 @@ const App = () => {
       <div className="app-container">
         <AddChart />
 
-        <div>
-          <ChartControls names={names} activeStatus={activeStatus} />
+        <div className="chart-container">
           <LineChart
             width={500}
             height={300}
@@ -62,6 +61,8 @@ const App = () => {
               );
             })}
           </LineChart>
+
+          <ChartControls names={names} activeStatus={activeStatus} />
         </div>
       </div>
     </>

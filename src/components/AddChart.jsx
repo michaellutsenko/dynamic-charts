@@ -8,7 +8,7 @@ const AddChart = () => {
   const [colour, setColour] = useState('#000000');
 
   return (
-    <div>
+    <div className="add-chart">
       <h3>Add new chart</h3>
       <input
         type="text"
