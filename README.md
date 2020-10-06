@@ -33,6 +33,11 @@ could swallow. See `src/App.js:18`.
 
 **What could be improved:**
 
+- When creating multiple charts, they appear out-of-sync. I know they don't have
+  to be synchronised, but they can be. I see two ways of solving this: one would
+  be sending one request every second and just increasing the number of
+  requested points, the other would be wrapping the calls with
+  `Promise.allSettled()`
 - The code structure is suitable for a small project, but on a real large-scale
   project this structure wouldn't have been used as it's hard to extend.
 - The extra step to format the data into a recharts-friendly shape - I'm not
